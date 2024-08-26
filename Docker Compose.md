@@ -20,7 +20,11 @@ Docker Compose 容器编排技术
 
 Docker compose实现容器编排技术。
 
-![img](assets/clip_image002-1724605384968-24.jpg)
+
+
+简单而言就是，提供一个启动的顺序，先启动mysql 再去启动springboot之类的，防止springboot启动之后数据库还没开
+
+<img src="assets/clip_image002-1724605384968-24.jpg" alt="img" style="zoom:150%;" />
 
  
 
@@ -28,7 +32,7 @@ Docker compose实现容器编排技术。
 
 ### 基本的概念
 
-Docker-Compose项目是**Docker****官方的开源项目**，负责实现对Docker容器集群的快速编排。
+Docker-Compose项目是**Docker**官方的**开源项目**，负责实现对Docker容器集群的快速编排。
 
 Docker-Compose将所管理的容器分为三层，分别是工程（project），服务（service）以及容器（container）。
 
@@ -152,20 +156,6 @@ docker-compose stop   # 停止服务
 
  
 
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
- 
-
 **1.**   创建一个docker-c**ompose.yml****；**
 
 **2.**   **定制docker-compose** **内容；**
@@ -237,29 +227,29 @@ networks:  ## 定义服务的桥
 
  
 
-Image 镜像名称；
+image 镜像名称；
 
-Build 根据docker file 打包 成镜像；
+build 根据docker file 打包 成镜像；
 
-Context 指定docker file文件位置；
+context 指定docker file文件位置；
 
-Commond 使用command可以覆盖容器启动后默认执行的命令；
+commond 使用command可以覆盖容器启动后默认执行的命令；
 
-Container_name 容器名称；
+container_name 容器名称； 如果不写不会复用会一直创建新的
 
 depends_on 指定依赖那个服务；
 
-Ports 映射的端口号；
+ports 映射的端口号；
 
 extra_hosts 会在/etc/hosts文件中添加一些记录；
 
-Volumes 持久化目录；
+volumes 持久化目录；
 
 volumes_from 从另外一个容器挂在数据卷；
 
-Dns 设置dns
+dns 设置dns
 
- 
+networks：在这里下面写一个 网络名，在最后写个networks:就可以将多个容器部署在同一个局域网内，详见下面的例子
 
  
 
@@ -299,6 +289,8 @@ networks:  ## 定义服务的桥
 
 
 
+
+
 #### Spring项目配置
 
 ```
@@ -319,7 +311,7 @@ server:
 
 ```
 
-
+注释在springboot当中，的数据库访问地址，使用compose时候直接写对应的服务名就可自动解析成ip
 
 #### 演示效果
 
